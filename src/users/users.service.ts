@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 
@@ -10,6 +9,14 @@ export const roundsOfHashing = 10;
 export class UsersService {
   constructor(private prisma: PrismaService) {}
   async create(createUserDto: CreateUserDto) {
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email: createUserDto.email },
+    });
+
+    if (existingUser) {
+      throw new ConflictException('User already exists');
+    }
+
     const hashedPassword = await bcrypt.hash(
       createUserDto.password,
       roundsOfHashing,
@@ -36,21 +43,21 @@ export class UsersService {
     return this.prisma.user.findUnique({ where: { email } });
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
-    if (updateUserDto.password) {
-      updateUserDto.password = await bcrypt.hash(
-        updateUserDto.password,
-        roundsOfHashing,
-      );
-    }
+  // async update(id: number, updateUserDto: UpdateUserDto) {
+  //   if (updateUserDto.password) {
+  //     updateUserDto.password = await bcrypt.hash(
+  //       updateUserDto.password,
+  //       roundsOfHashing,
+  //     );
+  //   }
 
-    return this.prisma.user.update({
-      where: { id },
-      data: {
-        ...updateUserDto,
-      },
-    });
-  }
+  //   return this.prisma.user.update({
+  //     where: { id },
+  //     data: {
+  //       ...updateUserDto,
+  //     },
+  //   });
+  // }
 
   delete(id: number) {
     return this.prisma.user.delete({ where: { id } });

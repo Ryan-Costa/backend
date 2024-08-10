@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { JwtStrategyService } from './auth/jwt-strategy/jwt-strategy.service';
+import { JwtStrategyService } from './auth/strategies/jwt-strategy.service';
 
 @Module({
   imports: [PrismaModule, UsersModule, AuthModule],
