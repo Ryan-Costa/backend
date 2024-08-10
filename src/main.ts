@@ -7,8 +7,7 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
-      whitelist: true,
-      forbidNonWhitelisted: true, // usei para garantir que os dados enviados estejam de acordo com o DTO
+      // forbidNonWhitelisted: true, // usei para garantir que os dados enviados estejam de acordo com o DTO
     }),
   );
   await app.listen(3000);
