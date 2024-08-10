@@ -6,7 +6,8 @@ import { JwtStrategyService } from './strategies/jwt-strategy.service';
 import { UsersModule } from 'src/users/users.module';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from './guard/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { LocalStrategy } from './strategies/local.strategy';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AuthGuard } from './guard/auth.guard';
   controllers: [AuthController],
   providers: [
     AuthService,
+    LocalStrategy,
     JwtStrategyService,
     {
       provide: APP_GUARD,
