@@ -13,7 +13,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
-import { Public } from 'src/decorators/is-public.decorator';
+import { Public } from 'src/auth/decorators/is-public.decorator';
 
 @Controller('users')
 @ApiTags('users')
