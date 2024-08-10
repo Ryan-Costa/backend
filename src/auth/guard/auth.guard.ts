@@ -9,7 +9,8 @@ import { jwtConstants } from '../constants';
 import { UsersService } from 'src/users/users.service';
 import { Request } from 'express';
 import { Reflector } from '@nestjs/core';
-import { IS_PUBLIC_KEY } from 'src/decorators/is-public.decorator';
+import { IS_PUBLIC_KEY } from 'src/auth/decorators/is-public.decorator';
+import { JwtPayload } from '../models/jwt-payload.model';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -33,20 +34,25 @@ export class AuthGuard implements CanActivate {
     const token = this.extractTokenFromHeader(request);
 
     if (!token) {
+      console.log('No token provided');
       throw new UnauthorizedException();
     }
 
     try {
-      const payload = await this.jwtService.verifyAsync(token, {
+      const payload: JwtPayload = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret,
       });
-      const user = await this.usersService.findOne(payload.id);
+
+      const user = await this.usersService.findOne(payload.userId);
 
       if (!user) {
+        console.log('User not found');
         throw new UnauthorizedException();
       }
-      request.user = user;
-    } catch {
+
+      request.user = payload;
+    } catch (err) {
+      console.log('Token verification failed: ', err);
       throw new UnauthorizedException();
     }
     return true;
