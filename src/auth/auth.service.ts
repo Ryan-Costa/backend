@@ -4,14 +4,14 @@ import * as bcrypt from 'bcrypt';
 import { UnauthorizedError } from './errors/unauthorized.error';
 import { UserPayload } from './models/UserPayload';
 import { UserToken } from './models/UserToken';
-import { UsersService } from 'src/users/users.service';
-import { User } from 'src/users/entities/user.entity';
+import { UserService } from 'src/user/user.service';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly userService: UsersService,
+    private readonly userService: UserService,
   ) {}
 
   async signIn(user: User): Promise<UserToken> {
