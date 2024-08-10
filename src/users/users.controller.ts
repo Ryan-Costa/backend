@@ -41,6 +41,13 @@ export class UsersController {
     return this.usersService.findOne(+id);
   }
 
+  @Post('email')
+  @UseGuards(JwtAuthGuard)
+  @ApiCreatedResponse()
+  findByEmail(@Body('email') email: string) {
+    return this.usersService.findByEmail(email);
+  }
+
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
   @ApiCreatedResponse()
