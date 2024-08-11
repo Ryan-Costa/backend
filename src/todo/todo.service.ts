@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class TodoService {
@@ -22,20 +23,9 @@ export class TodoService {
     return this.prisma.todo.findMany({ where: { userId } });
   }
 
-  findOne(id: number) {
-    const todo = this.prisma.todo.findUnique({
+  async findOne(id: number) {
+    const todo = await this.prisma.todo.findUnique({
       where: { id },
-    });
-
-    if (!todo) {
-      throw new NotFoundException(`Todo with id ${id} not found`);
-    }
-  }
-
-  update(id: number, updateTodoDto: UpdateTodoDto) {
-    const todo = this.prisma.todo.update({
-      where: { id },
-      data: updateTodoDto,
     });
 
     if (!todo) {
@@ -45,7 +35,32 @@ export class TodoService {
     return todo;
   }
 
-  delete(id: number) {
-    return this.prisma.todo.delete({ where: { id } });
+  async update(id: number, updateTodoDto: UpdateTodoDto) {
+    try {
+      return await this.prisma.todo.update({
+        where: { id },
+        data: updateTodoDto,
+      });
+    } catch (err) {
+      if (err instanceof Prisma.PrismaClientKnownRequestError) {
+        if (err.code === 'P2025') {
+          throw new NotFoundException(`Todo with id ${id} not found`);
+        }
+      }
+      throw err;
+    }
+  }
+
+  async delete(id: number) {
+    try {
+      return await this.prisma.todo.delete({ where: { id } });
+    } catch (err) {
+      if (err instanceof Prisma.PrismaClientKnownRequestError) {
+        if (err.code === 'P2025') {
+          throw new NotFoundException(`Todo with id ${id} not found`);
+        }
+      }
+      throw err;
+    }
   }
 }

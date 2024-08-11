@@ -1,12 +1,4 @@
-import {
-  BadRequestException,
-  Body,
-  Controller,
-  Get,
-  NotFoundException,
-  Post,
-  Query,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
@@ -17,21 +9,21 @@ export class UserController {
 
   @IsPublic()
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    const user = await this.userService.create(createUserDto);
+    return {
+      message: 'User created successfully',
+      user,
+    };
   }
 
   @Get()
   findUserByEmail(@Query('email') email: string) {
-    if (!email) {
-      throw new BadRequestException('Email is required');
-    }
+    return this.userService.findByEmail(email);
+  }
 
-    const user = this.userService.findByEmail(email);
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-
-    return user;
+  @Get('all')
+  findAll() {
+    return this.userService.findAll();
   }
 }

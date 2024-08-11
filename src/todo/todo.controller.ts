@@ -18,11 +18,16 @@ export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
   @Post()
-  create(@Body() createTodoDto: CreateTodoDto, @CurrentUser() user: User) {
+  async create(
+    @Body() createTodoDto: CreateTodoDto,
+    @CurrentUser() user: User,
+  ) {
     const userId = user.id;
-
-    console.log(createTodoDto);
-    return this.todoService.create(createTodoDto, userId);
+    const todo = await this.todoService.create(createTodoDto, userId);
+    return {
+      message: 'Todo created successfully',
+      todo,
+    };
   }
 
   @Get()
@@ -37,12 +42,15 @@ export class TodoController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
-    return this.todoService.update(+id, updateTodoDto);
+  async update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
+    await this.todoService.update(+id, updateTodoDto);
+    return { message: `Todo with ID ${id} is updated` };
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.todoService.delete(+id);
+  async delete(@Param('id') id: string) {
+    await this.todoService.delete(+id);
+
+    return { message: `Todo with ID ${id} successfully deleted` };
   }
 }
