@@ -2,72 +2,118 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# TO-DO List
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Este projeto é uma aplicação de gerenciamento de tarefas (to-do list) que implementa todas as funcionalidades especificadas no desafio para a empresa **[IZI APP](https://izi.app/)**, utilizando tecnologias modernas e uma arquitetura robusta.
 
-## Installation
+## 🚀 Sobre o Projeto
 
-```bash
-$ npm install
+A TO-DO List proporciona uma maneira eficiente de gerenciar tarefas, oferecendo funcionalidades como autenticação de usuário, persistência de dados e uma interface de usuário intuitiva e responsiva.
+
+## 🎯 Funcionalidades
+
+- Autenticação de usuário utilizando JWT.
+- Registro e login de usuários.
+- CRUD completo de tarefas (Create, Read, Update, Delete).
+- Associação de tarefas aos usuários, onde cada usuário tem sua própria lista de tarefas.
+- Interface de usuário responsiva e amigável.
+
+## 🛠 Tecnologias Utilizadas
+
+### Backend
+
+- **NestJS**
+- **TypeScript**
+- **Prisma**
+- **Docker**
+
+### Frontend
+
+- **React**
+- **TypeScript**
+- **Tanstack Query**
+- **React-Hook-Form**
+- **Zod**
+- **Tailwind**
+- **Shadcn**
+
+## 🔧 Configuração do Ambiente
+
+Este guia fornecerá instruções detalhadas sobre como configurar e rodar o projeto "TO-DO List" localmente. Siga os passos abaixo para ter uma cópia local instalada e funcionando.
+
+### Pré-requisitos
+
+Antes de começar, certifique-se de ter os seguintes softwares instalados:
+
+1. **NPM**: O gerenciador de pacotes do Node.js.
+
+   ```sh
+   npm install npm@latest -g
+   ```
+
+2. **Docker**: Plataforma para desenvolvimento e execução de aplicações em containers.
+
+- **[Docker](https://www.docker.com)**: Para criar e gerenciar containers.
+
+## 📦 Instalação
+Siga os passos abaixo para configurar o ambiente de desenvolvimento local:
+
+### Backend
+1. Clone o repositório
+
+```sh
+git clone https://github.com/Ryan-Costa/backend
+cd backend
 ```
+2. Instale os pacotes NPM
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```sh
+npm install
 ```
+3. Execute o Docker Compose
 
-## Test
+As informações estão no arquivo .env.example
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```sh
+docker compose up
 ```
+### Frontend
+1. Navegue até o diretório do frontend
 
-## Support
+```sh
+git clone https://github.com/Ryan-Costa/frontend
+cd frontend
+```
+2. Instale os pacotes NPM
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```sh
+npm install
+```
+3. Inicie o servidor de desenvolvimento
 
-## Stay in touch
+```sh
+npm run dev
+```
+🖼️ Demo
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Homepage
+![image](https://github.com/user-attachments/assets/7147424b-e9b0-4410-be51-24b29aa2b005)
 
-## License
+### Login
+![image](https://github.com/user-attachments/assets/9d626902-8c8f-4908-a509-61072be2d520)
 
-Nest is [MIT licensed](LICENSE).
+### Cadastrar
+![image](https://github.com/user-attachments/assets/7ecba4df-b7b6-4be3-a6b3-053b0505e39a)
+
+### Todos
+![image](https://github.com/user-attachments/assets/6cfa1307-68ce-492e-9879-2a2bce4f8da4)
+
+### Info User + Logout
+![image](https://github.com/user-attachments/assets/aabedf92-7a84-41ff-9482-8c883493a1ce)
+
+
+
+
+<p align="right">(<a href="#readme-top">Voltar para o topo</a>)</p>
