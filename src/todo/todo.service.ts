@@ -20,7 +20,10 @@ export class TodoService {
   }
 
   findAll(userId: number) {
-    return this.prisma.todo.findMany({ where: { userId } });
+    return this.prisma.todo.findMany({
+      where: { userId },
+      orderBy: { id: 'asc' },
+    });
   }
 
   async findOne(id: number) {
