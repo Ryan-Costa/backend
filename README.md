@@ -1,6 +1,13 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+
+<div align="center">
+  <a href="http://nestjs.com/" target="blank">
+    <img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" />
+  </a>
+  
+  <a href="https://reactjs.org/" target="blank">
+    <img src="https://reactnative.dev/img/header_logo.svg" width="200" alt="React Logo" />
+  </a>
+</div>
 
 
 
