@@ -1,14 +1,33 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
+import { Todo } from './entities/todo.entity';
+
+interface ITodoService {
+  create(createTodoDto: CreateTodoDto, userId: number): Promise<Todo>;
+  findAll(userId: number): Promise<Todo[]>;
+  findOne(id: number, teste: number): Promise<Todo>;
+  update(id: number, updateTodoDto: UpdateTodoDto): Promise<Todo>;
+  delete(id: number): Promise<Todo>;
+}
 
 @Injectable()
-export class TodoService {
+export class TodoService implements ITodoService {
   constructor(private readonly prisma: PrismaService) {}
   create(createTodoDto: CreateTodoDto, userId: number) {
     const { title } = createTodoDto;
+
+    if (!title || title.trim() === '') {
+      throw new BadRequestException(
+        'The title cannot be empty or contain only spaces.',
+      );
+    }
 
     return this.prisma.todo.create({
       data: {
