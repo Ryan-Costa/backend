@@ -1,9 +1,16 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreateTodoDto } from './create-todo.dto';
-import { IsBoolean, IsOptional } from 'class-validator';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { OmitType } from '@nestjs/mapped-types';
 
-export class UpdateTodoDto extends PartialType(CreateTodoDto) {
+export class UpdateTodoDto extends PartialType(
+  OmitType(CreateTodoDto, ['userId']),
+) {
   @IsBoolean()
   @IsOptional()
   done?: boolean;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
 }

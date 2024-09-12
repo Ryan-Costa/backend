@@ -3,7 +3,6 @@ version: '3.8'
 services:
   db:
     image: postgres
-    restart: always
     environment:
       - POSTGRES_PASSWORD=postgres
     container_name: postgres
@@ -17,7 +16,7 @@ services:
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     ports:
-      - '5432:5432'      
+      - '5432:5432'
 
   app:
     build:
@@ -27,17 +26,18 @@ services:
     environment:
       - PORT=${PORT}
       - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
     ports:
       - '3000:3000'
     depends_on:
-      db: 
+      db:
         condition: service_healthy
     volumes:
       - ./src:/app/src
+      - ./prisma:/app/prisma
 
   pgadmin:
     image: dpage/pgadmin4
-    restart: always
     container_name: nest-pgadmin4
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
